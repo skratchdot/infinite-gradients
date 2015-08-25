@@ -4,24 +4,49 @@
   <meta charset="utf-8" />
   <title>Infinite Gradients</title>
   <style type="text/css">
-    html,
-    body {
+    html, body {
       width: 100%;
       height: 100%;
       border: 0;
       margin: 0;
       padding: 0;
     }
+    #arrow {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        cursor: default;
+        transform: translateX(-50%) translateY(-50%) rotate(0deg);
+        text-shadow: 0px 0px 10px whitesmoke;
+        font-size: 20px;
+    }
   </style>
 </head>
 <body>
+  <div id="arrow">&rarr;</div>
   <script type="text/javascript">
     var colors = [];
     var intervalTime = 20;
     var speed = .5;
     var speedCoefficient = 10;
     var offset = 0;
+    var angle = 270;
     var stopped = false;
+    var getAngle = function (x1, y1, x2, y2) {
+      var angle = toDegrees(Math.atan2(y2 - y1, x2 - x1));
+      if (angle < 0) {
+        angle += 360;
+      }
+      return angle;
+    };
+    var getDistance = function (x1, y1, x2, y2) {
+      var distY = Math.abs(y2 - y1);
+      var distX = Math.abs(x2 - x1);
+      return Math.sqrt((distY * distY) + (distX * distX));
+    };
+    var toDegrees = function (radians) {
+      return radians * (180 / Math.PI);
+    };
     var randomBetween = function(min, max) {
       return Math.floor(Math.random() * (max - min + 1)) + min;
     };
@@ -39,8 +64,15 @@
       var height = 'innerHeight' in window
         ? window.innerHeight
         : document.documentElement.offsetHeight,
-        halfHeight = height / 2;
-      speed = (e.clientY - halfHeight) / (halfHeight);
+        width = 'innerWidth' in window
+        ? window.innerWidth
+        : document.documentElement.offsetWidth,
+        originY = height / 2,
+        originX = width / 2,
+        distance = getDistance(originX, originY, e.clientX, e.clientY),
+        distanceNormalized = distance / (Math.sqrt((originY*originY) + (originX*originX)));
+        speed = distanceNormalized;
+        angle = getAngle(originX, originY, e.clientX, e.clientY);
     });
     window.addEventListener('click', function (e) {
       stopped = !stopped;
@@ -57,7 +89,8 @@
           colors.unshift(randomColor());
           offset = 0;
         }
-        document.body.style.background = 'linear-gradient(to bottom, ' +
+        document.body.style.background = 'linear-gradient(' +
+          ((angle + 90) % 360) + 'deg, ' +
           colors[0] + ' ' + (-100 + offset) + '%' +
           ', ' +
           colors[1] + ' ' + (0 + offset) + '%' +
@@ -66,6 +99,8 @@
           ', ' +
           colors[3] + ' ' + (200 + offset) + '%' +
           ')';
+        document.getElementById('arrow').style.transform = 'translateX(-50%) ' +
+          'translateY(-50%) rotate(' + angle + 'deg)';
       }
     }, intervalTime);
   </script>
