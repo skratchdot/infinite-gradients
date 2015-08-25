@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Infinite Gradients</title>
+  <style type="text/css">
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      margin: 0;
+      padding: 0;
+    }
+  </style>
+</head>
+<body>
+  <script type="text/javascript">
+    var colors = [];
+    var intervalTime = 20;
+    var speed = .5;
+    var speedCoefficient = 10;
+    var offset = 0;
+    var stopped = false;
+    var randomBetween = function(min, max) {
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    };
+    var randomColor = function () {
+      return 'rgb(' +
+        randomBetween(0, 255) + ', ' +
+        randomBetween(0, 255) + ', ' +
+        randomBetween(0, 255) + ')';
+    };
+    // initialize colors
+    for (var i = 0; i < 4; i++) {
+      colors.push(randomColor());
+    }
+    window.addEventListener('mousemove', function (e) {
+      var height = 'innerHeight' in window
+        ? window.innerHeight
+        : document.documentElement.offsetHeight,
+        halfHeight = height / 2;
+      speed = (e.clientY - halfHeight) / (halfHeight);
+    });
+    window.addEventListener('click', function (e) {
+      stopped = !stopped;
+    });
+    setInterval(function() {
+      if (!stopped) {
+        offset += (speedCoefficient * speed);
+        if (offset < -100) {
+          colors = colors.slice(1, 4);
+          colors.push(randomColor());
+          offset = 0;
+        } else if (offset > 100) {
+          colors = colors.slice(0, 3);
+          colors.unshift(randomColor());
+          offset = 0;
+        }
+        document.body.style.background = 'linear-gradient(to bottom, ' +
+          colors[0] + ' ' + (-100 + offset) + '%' +
+          ', ' +
+          colors[1] + ' ' + (0 + offset) + '%' +
+          ', ' +
+          colors[2] + ' ' + (100 + offset) + '%' +
+          ', ' +
+          colors[3] + ' ' + (200 + offset) + '%' +
+          ')';
+      }
+    }, intervalTime);
+  </script>
+</body>
+</html>
