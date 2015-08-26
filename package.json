@@ -1,0 +1,41 @@
+{
+  "name": "infinite-gradients",
+  "version": "0.0.0",
+  "description": "An HTML experiment for randomly created gradients",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/skratchdot/infinite-gradients.git"
+  },
+  "author": "skratchdot",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/skratchdot/infinite-gradients/issues"
+  },
+  "homepage": "https://github.com/skratchdot/infinite-gradients#readme",
+  "devDependencies": {
+    "browserify": "^10.2.4",
+    "envify": "^3.4.0",
+    "gulp": "^3.9.0",
+    "gulp-connect": "^2.2.0",
+    "gulp-cssmin": "^0.1.7",
+    "gulp-imagemin": "^2.3.0",
+    "gulp-less": "^3.0.3",
+    "gulp-rimraf": "^0.1.1",
+    "gulp-size": "^1.2.2",
+    "gulp-uglify": "^1.2.0",
+    "gulp-util": "^3.0.6",
+    "jsxhint": "^0.15.1",
+    "react": "^0.13.3",
+    "react-router": "^0.13.3",
+    "reactify": "^1.1.1",
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^1.1.0",
+    "vinyl-transform": "^1.0.0"
+  },
+  "dependencies": {
+  }
+}
