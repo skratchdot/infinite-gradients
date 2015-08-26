@@ -78,15 +78,23 @@ module.exports = React.createClass({
 			stopped: !this.state.stopped
 		});
 	},
+	handleKeydown: function (e) {
+		var char = String.fromCharCode(e.keyCode || e.charCode).toUpperCase();
+		if (char === 'R') {
+			this.setState({radialMode: !this.state.radialMode});
+		}
+	},
 	componentDidMount: function () {
 		this.interval = setInterval(this.tick, this.props.intervalTime);
 		window.addEventListener('mousemove', this.handleMouseMove);
 		window.addEventListener('click', this.handleClick);
+		window.addEventListener('keydown', this.handleKeydown);
 	},
 	componentWillUnmount: function () {
 		clearInterval(this.interval);
 		window.removeEventListener('mousemove', this.handleMouseMove);
 		window.removeEventListener('click', this.handleClick);
+		window.removeEventListener('keydown', this.handleKeydown);
 	},
 	render: function () {
 		document.body.style.background = '' +
@@ -109,7 +117,8 @@ module.exports = React.createClass({
 				<div
 					style={{
 						transform: 'translateX(-50%) ' +
-							'translateY(-50%) rotate(' + this.state.angle + 'deg)'
+							'translateY(-50%) rotate(' + this.state.angle + 'deg)',
+						display: this.state.radialMode ? 'none' : 'block'
 					}}
 					id="arrow">&rarr;</div>
 			</div>
