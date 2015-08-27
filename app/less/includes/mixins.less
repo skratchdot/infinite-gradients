@@ -1,0 +1,7 @@
+/* Micro ClearFix Mixin */
+/* see: https://gist.github.com/geddski/2416187 */
+.clearfix {
+	zoom:1;
+	&:before, &:after{ content:""; display:table; }
+	&:after{ clear: both; }
+}

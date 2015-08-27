@@ -1,49 +1,10 @@
-html, body {
-	width: 100%;
-	height: 100%;
-	border: 0;
-	margin: 0;
-	padding: 0;
-	font-family: 'Lato', sans-serif;
-	background: linear-gradient(116deg, #41f850 -83.2877%, #406f85 16.7123%, #63ea4c 116.712%, #ce583f 216.712%);
-}
-header {
-	background: rgba(255, 255, 255, 0.7);
-	padding: 10px 20px;
-	a {
-		text-decoration: none;
-		color: #335;
-		&:hover {
-			text-decoration: underline;
-		}
-	}
-	small a {
-		color: #c00;
-		text-transform: none;
-		font-size: x-small;
-	}
-	h1 {
-		margin: 0;
-		text-transform: uppercase;
-	}
-}
+/* base includes */
+@import "./includes/mixins.less";
+@import "./includes/common.less";
 
-#arrow {
-	cursor: default;
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translateX(-50%) translateY(-50%) rotate(0deg);
-	text-shadow: 0px 0px 10px whitesmoke;
-	font-size: 20px;
-	user-select: none;
-}
+/* components */
+@import "./includes/components/header.less";
 
-#page-not-found {
-	margin: 50px;
-	padding: 50px;
-	border: 10px solid black;
-	border-radius: 10px;
-	background: rgba(255, 255, 255, 0.7);
-}
-
+/* pages */
+@import "./includes/pages/home.less";
+@import "./includes/pages/not-found.less";

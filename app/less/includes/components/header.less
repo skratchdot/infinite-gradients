@@ -1,0 +1,51 @@
+header {
+	background: rgba(255, 255, 255, 0.7);
+	padding-left: 20px;
+	.clearfix;
+	a {
+		text-decoration: none;
+		color: #335;
+		&:hover {
+			text-decoration: underline;
+		}
+	}
+	small a {
+		color: #c00;
+		text-transform: none;
+		font-size: x-small;
+	}
+	h1 {
+		margin: 0;
+		text-transform: uppercase;
+	}
+}
+
+#header-title {
+	float: left;
+}
+
+#header-controls {
+	float: right;
+	.control {
+		cursor: pointer;
+		float: right;
+		text-align: center;
+		height: 40px;
+		width: 50px;
+		padding: 0px 5px;
+		border-left: 1px solid #999;
+		color: #666;
+		margin: 0;
+		strong {
+			display: block;
+			padding-top: 3px;
+		}
+		small {
+			display: block;
+			font-size: x-small;
+		}
+		&:hover {
+			background: rgba(255, 255, 255, 0.8);
+		}
+	}
+}

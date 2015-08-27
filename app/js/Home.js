@@ -2,6 +2,7 @@
 "use strict";
 var React = require('react/addons');
 var Header = require('./Header');
+var Control = require('./Control');
 var infiniteGradients = require('../../lib/index');
 // functions
 var getAngle = infiniteGradients.getAngle;
@@ -82,6 +83,8 @@ module.exports = React.createClass({
 		var char = String.fromCharCode(e.keyCode || e.charCode).toUpperCase();
 		if (char === 'R') {
 			this.setState({radialMode: !this.state.radialMode});
+		} else if (char === ' ') {
+			this.setState({stopped: !this.state.stopped});
 		}
 	},
 	componentDidMount: function () {
@@ -97,6 +100,18 @@ module.exports = React.createClass({
 		window.removeEventListener('keydown', this.handleKeydown);
 	},
 	render: function () {
+		var controls = [],
+			displaySpeed = (this.state.speed * 10).toFixed(2);
+		if (parseFloat(displaySpeed) === 10) {
+			displaySpeed = '10.0';
+		}
+		controls.push(<Control title="about" value="?" />);
+		controls.push(<Control title="type" value={this.state.radialMode ? 'Radial' : 'Linear'} />);
+		controls.push(<Control title="speed" value={displaySpeed} />);
+		controls.push(<Control title="y" value={(this.state.posY * 100).toFixed(1)} />);
+		controls.push(<Control title="x" value={(this.state.posX * 100).toFixed(1)} />);
+		controls.push(<Control title="angle" value={this.state.angle.toFixed(1) + String.fromCharCode(176)} />);
+
 		document.body.style.background = '' +
 			(
 				this.state.radialMode ?
@@ -113,7 +128,7 @@ module.exports = React.createClass({
 			')';
 		return (
 			<div>
-				<Header />
+				<Header controls={controls} />
 				<div
 					style={{
 						transform: 'translateX(-50%) ' +
