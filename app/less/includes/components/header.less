@@ -27,6 +27,7 @@ header {
 #header-controls {
 	float: right;
 	.control {
+		position: relative;
 		cursor: pointer;
 		float: right;
 		text-align: center;
@@ -46,6 +47,13 @@ header {
 		}
 		&:hover {
 			background: rgba(255, 255, 255, 0.8);
+		}
+		.lock-container {
+			position: absolute;
+			bottom: 3px;
+			left: 0;
+			width: 15px;
+			height: 15px;
 		}
 	}
 }

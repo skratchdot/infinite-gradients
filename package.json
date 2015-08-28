@@ -29,6 +29,8 @@
     "gulp-uglify": "^1.2.0",
     "gulp-util": "^3.0.6",
     "jsxhint": "^0.15.1",
+    "object-path-get": "0.0.2",
+    "object-path-set": "0.0.1",
     "react": "^0.13.3",
     "react-router": "^0.13.3",
     "reactify": "^1.1.1",
@@ -36,6 +38,5 @@
     "vinyl-source-stream": "^1.1.0",
     "vinyl-transform": "^1.0.0"
   },
-  "dependencies": {
-  }
+  "dependencies": {}
 }
