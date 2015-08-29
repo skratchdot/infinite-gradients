@@ -3,6 +3,7 @@
 var React = require('react/addons');
 var Router = require('react-router');
 var Route = Router.Route;
+var About = require('./About');
 var Home = require('./Home');
 var NotFound = require('./NotFound');
 
@@ -16,9 +17,10 @@ var App = React.createClass({
 var routes = (
 	<Route handler={App}>
 		<Route handler={App} path="/infinite-gradients">
-			<Route path="/infinite-gradients/?" handler={Home} scrollBehavior="scrollToTop" />
+			<Route name="Home" path="/infinite-gradients/?" handler={Home} scrollBehavior="scrollToTop" />
+			<Route name="About" path="/infinite-gradients/about/?" handler={About} scrollBehavior="scrollToTop" />
 		</Route>
-		<Route path="*" handler={NotFound} scrollBehavior="scrollToTop" />
+		<Route name="NotFound" path="*" handler={NotFound} scrollBehavior="scrollToTop" />
 	</Route>
 );
 

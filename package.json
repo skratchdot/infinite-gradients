@@ -1,7 +1,7 @@
 {
   "name": "infinite-gradients",
   "version": "0.0.0",
-  "description": "An HTML experiment for randomly created gradients",
+  "description": "A tool for generating randomly created CSS3 gradients",
   "main": "lib/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -30,6 +30,7 @@
     "gulp-util": "^3.0.6",
     "jsxhint": "^0.15.1",
     "lodash.throttle": "^3.0.4",
+    "marked": "^0.3.5",
     "object-path-get": "0.0.2",
     "object-path-set": "0.0.1",
     "react": "^0.13.3",

@@ -8,7 +8,7 @@ module.exports = React.createClass({
 		return (
 			<div>
 				<Header />
-				<div id="page-not-found">
+				<div id="page-not-found" className="well">
 					<h1>404 - Page Not Found</h1>
 					<p>
 						<h4>Sorry, we couldn't find the page you were looking for.</h4>

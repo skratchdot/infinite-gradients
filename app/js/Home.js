@@ -192,6 +192,14 @@ module.exports = React.createClass({
 				lockedSpeed: true,
 				speed: charAsInt / 10
 			});
+		} else if (char === 'V') {
+			this.toggleState('lockedColor1');
+		} else if (char === 'B') {
+			this.toggleState('lockedColor2');
+		} else if (char === 'N') {
+			this.toggleState('lockedColor3');
+		} else if (char === 'M') {
+			this.toggleState('lockedColor4');
 		}
 	},
 	toggleState: function (key) {
@@ -221,15 +229,18 @@ module.exports = React.createClass({
 		window.removeEventListener('keydown', this.handleKeydown);
 	},
 	updateUrl: function () {
-		this.replaceWith('/infinite-gradients', {}, {
-			type: this.state.radialMode ? 'radial' : 'linear',
-			speed: this.state.speed.toFixed(3),
-			offset: this.state.offset.toFixed(2),
-			angle: this.state.angle.toFixed(1),
-			posX: this.state.posX.toFixed(3),
-			posY: this.state.posY.toFixed(3),
-			colors: this.state.colors.join(',').replace('#','')
-		});
+		var route = 'Home';
+		if (this.isActive(route)) {
+			this.replaceWith(route, {}, {
+				type: this.state.radialMode ? 'radial' : 'linear',
+				speed: this.state.speed.toFixed(3),
+				offset: this.state.offset.toFixed(2),
+				angle: this.state.angle.toFixed(1),
+				posX: this.state.posX.toFixed(3),
+				posY: this.state.posY.toFixed(3),
+				colors: this.state.colors.join(',').replace('#','')
+			});
+		}
 	},
 	componentDidUpdate: function () {
 		// update url
@@ -276,7 +287,6 @@ module.exports = React.createClass({
 				/>
 			);
 		};
-		controls.push(getControl('about', '?', false, false, null, 'center'));
 		controls.push(getControl('type', this.state.radialMode ? 'Radial' : 'Linear', false, false, function () {$this.toggleState('radialMode');}, 'right'));
 		controls.push(getControl('speed', (this.state.speed * 10).toFixed(2), true, this.state.lockedSpeed, 'Speed', 'right'));
 		controls.push(getControl('offset', this.state.offset.toFixed(2), true, this.state.lockedOffset, 'Offset', 'right'));
