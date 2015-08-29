@@ -29,6 +29,7 @@
     "gulp-uglify": "^1.2.0",
     "gulp-util": "^3.0.6",
     "jsxhint": "^0.15.1",
+    "lodash.throttle": "^3.0.4",
     "object-path-get": "0.0.2",
     "object-path-set": "0.0.1",
     "react": "^0.13.3",

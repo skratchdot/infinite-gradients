@@ -1,8 +1,10 @@
 /** @jsx React.DOM */
 "use strict";
 var React = require('react/addons');
+var Router = require('react-router');
 var Header = require('./Header');
 var Control = require('./Control');
+var throttle = require('lodash.throttle');
 var pathGet = require('object-path-get');
 var pathSet = require('object-path-set');
 var infiniteGradients = require('../../lib/index');
@@ -12,6 +14,7 @@ var getDistance = infiniteGradients.getDistance;
 var randomColor = infiniteGradients.randomColor;
 
 module.exports = React.createClass({
+	mixins: [Router.Navigation, Router.State],
 	getDefaultProps: function () {
 		return {
 			intervalTime: 20,
@@ -19,14 +22,57 @@ module.exports = React.createClass({
 		};
 	},
 	getInitialState: function () {
+		var i, colorLen = 4, query, getFloat, getBetween,
+			colors, radialMode, speed, offset, angle, posX, posY;
+
+		// helper function
+		getFloat = function (val, defaultValue) {
+			defaultValue = defaultValue || 0;
+			val = parseFloat(val);
+			if (Number.isNaN(val)) {
+				val = defaultValue;
+			}
+			return val;
+		};
+		getBetween = function (val, min, max) {
+			val = Math.max(val, min);
+			val = Math.min(val, max);
+			return val;
+		};
+
+		// get items from query string
+		query = this.getQuery();
+		colors = pathGet(query, 'colors', '41f850,406f85,63ea4c,ce583f');
+		radialMode = pathGet(query, 'type', 'linear');
+		speed = getFloat(pathGet(query, 'speed', 0.2));
+		offset = getFloat(pathGet(query, 'offset', 16.0));
+		angle = getFloat(pathGet(query, 'angle', 15));
+		posX = getFloat(pathGet(query, 'posX', 0));
+		posY = getFloat(pathGet(query, 'posY', 0));
+
+		// correct values
+		colors = ('' + colors).split(',').slice(0, 4);
+		while (colors.length < colorLen) {
+			colors.push(infiniteGradients.randomColor());
+		}
+		for (i = 0; i < colors.length; i++) {
+			colors[i] = '#' + colors[i].toLowerCase().replace(/[^0-9a-f]/gi, '');
+		}
+		radialMode = radialMode === 'radial' ? true : false;
+		speed = getBetween(speed, 0, 1);
+		offset = getBetween(offset, 0, 100);
+		angle = getBetween(angle, 0, 360);
+		posX = getBetween(posX, 0, 1);
+		posY = getBetween(posY, 0, 1);
+
 		return {
-			colors: ['#41f850', '#406f85', '#63ea4c', '#ce583f'],
-			radialMode: false,
-			speed: 0.5,
-			offset: 0,
-			angle: 270,
-			posX: 0.5,
-			posY: 0.5,
+			colors: colors,
+			radialMode: radialMode,
+			speed: speed,
+			offset: offset,
+			angle: angle,
+			posX: posX,
+			posY: posY,
 			lockedColor1: false,
 			lockedColor2: false,
 			lockedColor3: false,
@@ -36,7 +82,7 @@ module.exports = React.createClass({
 			lockedPosY: false,
 			lockedSpeed: false,
 			lockedOffset: false,
-			lockedEverything: false
+			lockedEverything: true
 		};
 	},
 	tick: function () {
@@ -174,8 +220,26 @@ module.exports = React.createClass({
 		window.removeEventListener('click', this.handleClick);
 		window.removeEventListener('keydown', this.handleKeydown);
 	},
+	updateUrl: function () {
+		this.replaceWith('/infinite-gradients', {}, {
+			type: this.state.radialMode ? 'radial' : 'linear',
+			speed: this.state.speed.toFixed(3),
+			offset: this.state.offset.toFixed(2),
+			angle: this.state.angle.toFixed(1),
+			posX: this.state.posX.toFixed(3),
+			posY: this.state.posY.toFixed(3),
+			colors: this.state.colors.join(',').replace('#','')
+		});
+	},
+	componentDidUpdate: function () {
+		// update url
+		if (typeof this.updateUrlThrottled !== 'function') {
+			this.updateUrlThrottled = throttle(this.updateUrl, 500);
+		}
+		this.updateUrlThrottled();
+	},
 	render: function () {
-		var $this = this, controls = [], getColorValue, getControl;
+		var $this = this, controls = [], getColorValue, getControl, keyNum = 0;
 		getColorValue = function (num, color) {
 			return (
 				<div>
@@ -201,6 +265,7 @@ module.exports = React.createClass({
 			}
 			return (
 				<Control
+					key={'controlKey-' + keyNum++}
 					title={title}
 					value={value}
 					showLock={showLock}
@@ -224,7 +289,7 @@ module.exports = React.createClass({
 		controls.push(getControl(this.state.colors[0], getColorValue(1, this.state.colors[0]), true, this.state.lockedColor1, 'Color1', 'right'));
 		controls.push(getControl('status', this.state.lockedEverything ? <div style={{color:'#c80000'}}>Off</div> : 'On', true, this.state.lockedEverything, 'Everything', 'right'));
 
-		document.body.style.background = '' +
+		document.body.style.backgroundImage = '' +
 			(
 				this.state.radialMode ?
 				'radial-gradient(circle at ' + (this.state.posX * 100) + '% ' + (this.state.posY * 100) + '%,' :
