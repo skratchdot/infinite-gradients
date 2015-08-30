@@ -299,20 +299,9 @@ module.exports = React.createClass({
 		controls.push(getControl(this.state.colors[0], getColorValue(1, this.state.colors[0]), true, this.state.lockedColor1, 'Color1', 'right'));
 		controls.push(getControl('status', this.state.lockedEverything ? <div style={{color:'#c80000'}}>Off</div> : 'On', true, this.state.lockedEverything, 'Everything', 'right'));
 
-		document.body.style.backgroundImage = '' +
-			(
-				this.state.radialMode ?
-				'radial-gradient(circle at ' + (this.state.posX * 100) + '% ' + (this.state.posY * 100) + '%,' :
-				'linear-gradient(' + ((this.state.angle + 90) % 360) + 'deg, '
-			) +
-			this.state.colors[0] + ' ' + (-100 + this.state.offset) + '%' +
-			', ' +
-			this.state.colors[1] + ' ' + (0 + this.state.offset) + '%' +
-			', ' +
-			this.state.colors[2] + ' ' + (100 + this.state.offset) + '%' +
-			', ' +
-			this.state.colors[3] + ' ' + (200 + this.state.offset) + '%' +
-			')';
+		document.body.style.backgroundImage = '' + (this.state.radialMode ?
+			infiniteGradients.getRadialGradient(this.state.colors.slice(), this.state.offset, this.state.posX, this.state.posY) :
+			infiniteGradients.getLinearGradient(this.state.colors.slice(), this.state.offset, this.state.angle + 90));
 		return (
 			<div>
 				<Header controls={controls} />
