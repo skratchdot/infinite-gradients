@@ -2,6 +2,7 @@
 "use strict";
 var React = require('react/addons');
 var Router = require('react-router');
+var ReactZeroClipboard = require('react-zeroclipboard');
 var Header = require('./Header');
 var Control = require('./Control');
 var throttle = require('lodash.throttle');
@@ -163,7 +164,9 @@ module.exports = React.createClass({
 		}
 	},
 	handleClick: function (e) {
-		if (!document.querySelector('header').contains(e.target)) {
+		if (!document.querySelector('header').contains(e.target) &&
+			!document.querySelector('#css-container .well').contains(e.target) &&
+			document.querySelector('#app').contains(e.target)) {
 			this.setEventState(e);
 			this.setState({
 				lockedEverything: !this.state.lockedEverything
@@ -216,6 +219,25 @@ module.exports = React.createClass({
 			$this.setState(obj);
 		};
 	},
+	getCssBase: function () {
+		return  '' + (this.state.radialMode ?
+			infiniteGradients.getRadialGradient(this.state.colors.slice(), this.state.offset, this.state.posX, this.state.posY) :
+			infiniteGradients.getLinearGradient(this.state.colors.slice(), this.state.offset, this.state.angle + 90));
+	},
+	getCssText: function () {
+		return 'background-image: ' + this.getCssBase() + ';';
+	},
+	handleCopyToClipboard: function () {
+		return [
+			'/*',
+			' * css generated at: ' + document.location.toString(),
+			' */',
+			'body {',
+			'  ' + this.getCssText(),
+			'}',
+			''
+		].join('\n');
+	},
 	componentDidMount: function () {
 		this.interval = setInterval(this.tick, this.props.intervalTime);
 		window.addEventListener('mousemove', this.handleMouseMove);
@@ -250,7 +272,8 @@ module.exports = React.createClass({
 		this.updateUrlThrottled();
 	},
 	render: function () {
-		var $this = this, controls = [], getColorValue, getControl, keyNum = 0;
+		var $this = this, controls = [], keyNum = 0,
+			getColorValue, getControl;
 		getColorValue = function (num, color) {
 			return (
 				<div>
@@ -299,9 +322,7 @@ module.exports = React.createClass({
 		controls.push(getControl(this.state.colors[0], getColorValue(1, this.state.colors[0]), true, this.state.lockedColor1, 'Color1', 'right'));
 		controls.push(getControl('status', this.state.lockedEverything ? <div style={{color:'#c80000'}}>Off</div> : 'On', true, this.state.lockedEverything, 'Everything', 'right'));
 
-		document.body.style.backgroundImage = '' + (this.state.radialMode ?
-			infiniteGradients.getRadialGradient(this.state.colors.slice(), this.state.offset, this.state.posX, this.state.posY) :
-			infiniteGradients.getLinearGradient(this.state.colors.slice(), this.state.offset, this.state.angle + 90));
+		document.body.style.backgroundImage = this.getCssBase();
 		return (
 			<div>
 				<Header controls={controls} />
@@ -312,6 +333,23 @@ module.exports = React.createClass({
 						display: this.state.radialMode ? 'none' : 'block'
 					}}
 					id="arrow">&rarr;</div>
+				<div id="css-container">
+					<div className="well">
+						<strong>
+							{this.getCssText()}
+						</strong>
+						<br /><br />
+						<ReactZeroClipboard getText={this.handleCopyToClipboard}>
+							<div style={{cursor:'pointer'}}>
+								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 700.4">
+								  <path d="M439.4 41.7v-29c0-7-5.7-12.7-12.6-12.7H188.3L0 188.3V615c0 7 5.6 12.6 12.6 12.6h414.2c7 0 12.5-5.6 12.5-12.5V42zM72.2 555.4v-342h128.6c7 0 12.6-5.6 12.6-12.6V72.2H367v483.2H72.3z"/>
+								  <path d="M501 167.8h-25.2v485.5c0 6-5 11-11 11h-359v25c0 6.2 5 11 11 11H501c6 0 11-4.8 11-11V179c0-6-5-11-11-11z"/>
+								</svg>
+								<small>&nbsp;&nbsp;&nbsp;copy CSS to clipboard by clicking here</small>
+							</div>
+						</ReactZeroClipboard>
+					</div>
+				</div>
 			</div>
 		);
 	}
