@@ -7,6 +7,7 @@ var exec = require('child_process').exec;
 var fs = require('fs');
 var gulp = require('gulp');
 var imagemin = require('gulp-imagemin');
+var jsdox = require('jsdox');
 var jsxhint = require('jsxhint');
 var less = require('gulp-less');
 var marked = require('marked');
@@ -123,6 +124,37 @@ gulp.task('readme', function () {
 		].join('\n'),
 		'utf-8'
 	);
+});
+
+gulp.task('jsdox', function () {
+	jsdox.generateForDir('./lib/index.js', './docs', null, function () {
+		var contents = fs.readFileSync(__dirname + '/README.md', 'utf-8');
+		var startString = '\n## Node JS Library';
+		var indexStart = ((new RegExp(startString)).exec(contents)).index;
+		var indexEnd = (/\n## Command Line Utility/.exec(contents)).index;
+		var start = contents.slice(0, indexStart + startString.length);
+		var end = contents.slice(indexEnd);
+		var docs = fs.readFileSync(__dirname + '/docs/index.md', 'utf-8').split('* * *');
+		var docHeader = [
+			'You can use the infinite-gradient functions within node by running:\n',
+			'```bash',
+			'npm install --save infinite-gradient',
+			'```',
+			'\nand including the library in your code:\n',
+			'```javascript',
+			'var infiniteGradients = require(\'infinite-gradients\');',
+			'```',
+			'\n\nThe Infinite Gradients library contains a few functions for generating',
+			'gradients, and a few helper functions that may or may not be useful to you.',
+			'\nThe **API** is described below:\n\n\n'			
+		].join('\n');
+		var newReadme = [
+			start,
+			docHeader + docs[1].trim(),
+			end
+		].join('\n\n');
+		fs.writeFileSync(__dirname + '/README.md', newReadme, 'utf-8');
+	});
 });
 
 gulp.task('watch', function () {

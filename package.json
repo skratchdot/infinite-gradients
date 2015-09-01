@@ -2,7 +2,11 @@
   "name": "infinite-gradients",
   "version": "0.0.0",
   "description": "A tool for generating randomly created CSS3 gradients",
-  "main": "lib/index.js",
+  "main": "./lib/index.js",
+  "preferGlobal": true,
+  "bin": {
+    "infinite-gradients": "./lib/cli.js"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -28,6 +32,7 @@
     "gulp-size": "^2.0.0",
     "gulp-uglify": "^1.4.0",
     "gulp-util": "^3.0.6",
+    "jsdox": "^0.4.9",
     "jsxhint": "^0.15.1",
     "lodash.throttle": "^3.0.4",
     "marked": "^0.3.5",
