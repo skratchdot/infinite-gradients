@@ -36,6 +36,7 @@ module.exports = React.createClass({
 				<div id="header-controls">
 					{controls}
 				</div>
+				<base href={document.location.protocol + '//' + document.location.host + document.location.pathname} />
 			</header>
 		);
 	}

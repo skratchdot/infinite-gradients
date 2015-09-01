@@ -2,6 +2,7 @@
 "use strict";
 var React = require('react/addons');
 var Header = require('./Header');
+var Router = require('react-router');
 
 module.exports = React.createClass({
 	render: function () {
@@ -12,7 +13,13 @@ module.exports = React.createClass({
 					<h1>404 - Page Not Found</h1>
 					<p>
 						<h4>Sorry, we couldn't find the page you were looking for.</h4>
-						<h5>Try going to the <a href="/infinite-gradients">Homepage</a> instead.</h5>
+						<h5>
+							Try going to the
+							&nbsp;
+							<Router.Link to="Home">Homepage</Router.Link>
+							&nbsp;
+							instead.
+						</h5>
 					</p>
 				</div>
 			</div>
