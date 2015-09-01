@@ -30,7 +30,7 @@ var displaySize = function (title) {
 };
 
 gulp.task('clean', function () {
-	return gulp.src([devDir + '/*', prodDir + '/*'], {read: false})
+	return gulp.src([devDir + '/*', prodDir + '/*', '!' + prodDir + '/.git'], {read: false})
 		.pipe(rimraf());
 });
 
@@ -106,7 +106,8 @@ gulp.task('images', function () {
 gulp.task('copy', function () {
 	gulp.src([
 			'./app/*.html',
-			'./app/favicon.ico'
+			'./app/favicon.ico',
+			'./README.md'
 		])
 		.pipe(gulp.dest(devDir))
 		.pipe(gulp.dest(prodDir));
