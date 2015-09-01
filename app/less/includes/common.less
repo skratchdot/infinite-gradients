@@ -13,11 +13,25 @@ body {
     background-attachment: fixed;
 }
 
-pre {
+.codeBlocks {
 	background: #eee;
 	border: 2px solid #999;
 	border-radius: 10px; 
 	padding: 10px;
+}
+
+code {
+	.codeBlocks;
+	padding: 4px;
+}
+
+pre {
+	.codeBlocks;
+	code {
+	  background: transparent;
+	  border: 0;
+	  border-radius: 0;
+	}
 }
 
 .well {

@@ -1,4 +1,4 @@
-# infinite-gradients
+# infiniteGradients
 
 A library for generating CSS gradients
 
@@ -11,7 +11,7 @@ var infiniteGradients = require('infinite-gradients');
 
 * * *
 
-### infinite-gradients.toDegrees(radians) 
+### infiniteGradients.toDegrees(radians) 
 
 Converts from radians to degrees
 
@@ -28,7 +28,7 @@ infiniteGradients.toDegrees(0); // returns: 0
 ```
 
 
-### infinite-gradients.getAngle(x1, y1, x2, y2) 
+### infiniteGradients.getAngle(x1, y1, x2, y2) 
 
 Get the angle between 2 points with x/y coordinates
 
@@ -51,7 +51,7 @@ infiniteGradients.getAngle(0,0,10,10); // returns 45
 ```
 
 
-### infinite-gradients.getDistance(x1, y1, x2, y2) 
+### infiniteGradients.getDistance(x1, y1, x2, y2) 
 
 Get the distance between 2 points with x/y coordinates
 
@@ -74,7 +74,7 @@ infiniteGradients.getDistance(0,0,0,5); // returns: 5
 ```
 
 
-### infinite-gradients.toHex(num) 
+### infiniteGradients.toHex(num) 
 
 Convert a decimal to hexidecimal format. pads to at least 2 digits.
 
@@ -91,7 +91,7 @@ infiniteGradients.toHex(11); // returns: '0b'
 ```
 
 
-### infinite-gradients.floatBetween(min, max) 
+### infiniteGradients.floatBetween(min, max) 
 
 Returns a random float between min (inclusive) and max (exclusive)
 
@@ -110,7 +110,7 @@ infiniteGradients.floatBetween(0,100); // returned: 77.16259211301804
 ```
 
 
-### infinite-gradients.intBetween(min, max) 
+### infiniteGradients.intBetween(min, max) 
 
 Returns a random integer between min (inclusive) and max (inclusive)
 
@@ -129,7 +129,7 @@ infiniteGradients.intBetween(0,100); // returned: 86
 ```
 
 
-### infinite-gradients.randomColor() 
+### infiniteGradients.randomColor() 
 
 Return a random RGB color in hex format
 
@@ -142,7 +142,7 @@ infiniteGradients.randomColor(); // returned: '#5bb023'
 ```
 
 
-### infinite-gradients.getRadialGradient(colors, offset, x, y) 
+### infiniteGradients.getRadialGradient(colors, offset, x, y) 
 
 Gets a radial gradient CSS function as a string
 
@@ -165,7 +165,7 @@ infiniteGradients.getRadialGradient(['red','#286554','blue','#9619e2'], 25, .021
 ```
 
 
-### infinite-gradients.getLinearGradient(colors, offset, angle) 
+### infiniteGradients.getLinearGradient(colors, offset, angle) 
 
 Gets a linear gradient CSS function as a string
 

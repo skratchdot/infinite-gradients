@@ -131,14 +131,14 @@ gulp.task('jsdox', function () {
 		var contents = fs.readFileSync(__dirname + '/README.md', 'utf-8');
 		var startString = '\n## Node JS Library';
 		var indexStart = ((new RegExp(startString)).exec(contents)).index;
-		var indexEnd = (/\n## Command Line Utility/.exec(contents)).index;
+		var indexEnd = (/\n## Source Code/.exec(contents)).index;
 		var start = contents.slice(0, indexStart + startString.length);
 		var end = contents.slice(indexEnd);
 		var docs = fs.readFileSync(__dirname + '/docs/index.md', 'utf-8').split('* * *');
 		var docHeader = [
-			'You can use the infinite-gradient functions within node by running:\n',
+			'You can use the infinite-gradients functions within node by running:\n',
 			'```bash',
-			'npm install --save infinite-gradient',
+			'npm install --save infinite-gradients',
 			'```',
 			'\nand including the library in your code:\n',
 			'```javascript',
