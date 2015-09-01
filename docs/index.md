@@ -1,6 +1,5 @@
 # infinite-gradients
 
-infinite-gradients.js
 A library for generating CSS gradients
 
 

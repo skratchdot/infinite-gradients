@@ -1,6 +1,6 @@
 {
   "name": "infinite-gradients",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "A tool for generating randomly created CSS3 gradients",
   "main": "./lib/index.js",
   "preferGlobal": true,
@@ -47,6 +47,7 @@
     "vinyl-transform": "^1.0.0"
   },
   "dependencies": {
+    "commander": "^2.8.1",
     "onecolor": "^2.5.0"
   }
 }

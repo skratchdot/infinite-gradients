@@ -4,9 +4,11 @@ An HTML experiment built on [React](https://facebook.github.io/react/)
 for generating randomly created CSS3 gradients (both linear and radial).
 
 [Infinite Gradients](https://github.com/skratchdot/infinite-gradients)
-comes in 3 forms (a [website](http://projects.skratchdot.com/infinite-gradients/),
-a [node.js library](#node-js-library),
-and a [command line utility](#command-line-utility)).
+comes in 3 forms (
+a [website](http://projects.skratchdot.com/infinite-gradients/),
+a [command line utility](#command-line-utility),
+and a [node.js library](#node-js-library)
+).
 
 
 ## Website
@@ -41,12 +43,70 @@ or by hitting your spacebar.
 | Color 4    | M          | Locks/Unlocks Color 1 from being randomly generated      |
 
 
-## Node JS Library
+## Command Line Utility
 
-You can use the infinite-gradient functions within node by running:
+Infinite Gradients is available as a command line tool that outputs random
+(or specific) CSS gradient functions.  You can install it by running:
 
 ```bash
-npm install --save infinite-gradient
+npm install -g infinite-gradients
+```
+
+After installation, you will have a global executable called `infinite-gradients`.
+
+### Help
+
+To print help information, run: `infinite-gradients --help`
+
+```bash
+  Usage: infinite-gradients [options]
+
+  Options:
+
+    -h, --help             output usage information
+    -v, --version          output the version number
+    -t, --type <type>      type of gradient: linear or radial
+    -a, --angle <angle>    angle of linear gradient in degrees (0-360)
+    -x, --x <x>            x coordinate of radial gradient center (% between 0-1)
+    -y, --y <y>            y coordinate of radial gradient center (% between 0-1)
+    -o, --offset <offset>  the offset of the gradient (between 0-100)
+    -c, --colors <colors>  a list of 4 css colors
+```
+
+
+### Example
+
+Generate a random gradient:
+```bash
+$ infinite-gradients
+linear-gradient(303.6deg, #c621e9 -26.73%, #1ab128 73.27%, #3366ae 173.27%, #0eac81 273.27%)
+```
+
+Do it again and it's different:
+```bash
+$ infinite-gradients
+radial-gradient(circle at 52.7% 59.0%, #debe11 -60.07%, #fcf501 39.93%, #ecae8f 139.93%, #23f5d1 239.93%)
+```
+
+Now you can make sure that it's a linear gradient:
+```bash
+$infinite-gradients --type linear
+linear-gradient(239.2deg, #35cdca -13.53%, #2bc3bf 86.47%, #8146cb 186.47%, #ae06f9 286.47%)
+```
+
+Now you can specify the colors and angle:
+```bash
+$ infinite-gradients --type linear --angle 55.4 --colors 123123,ff00ff,9911f5,a36b3f
+linear-gradient(55.4deg, #123123 -39.68%, #ff00ff 60.32%, #9911f5 160.32%, #a36b3f 260.32%)
+```
+
+
+## Node JS Library
+
+You can use the infinite-gradients functions within node by running:
+
+```bash
+npm install --save infinite-gradients
 ```
 
 and including the library in your code:
@@ -235,10 +295,6 @@ Gets a linear gradient CSS function as a string
 // returns: 'linear-gradient(142.3deg, #ff0000 -75.00%, #286554 25.00%, #0000ff 125.00%, #9619e2 225.00%)'
 infiniteGradients.getLinearGradient(['red','#286554','blue','#9619e2'], 25, 142.3);
 ```
-
-
-## Command Line Utility
-
 
 
 ## Source Code
