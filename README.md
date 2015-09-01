@@ -41,6 +41,7 @@ or by hitting your spacebar.
 | Color 2    | B          | Locks/Unlocks Color 1 from being randomly generated      |
 | Color 3    | N          | Locks/Unlocks Color 1 from being randomly generated      |
 | Color 4    | M          | Locks/Unlocks Color 1 from being randomly generated      |
+| Randomize  | R          | Randomizes the current settings
 
 
 ## Command Line Utility

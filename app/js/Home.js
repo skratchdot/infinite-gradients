@@ -86,6 +86,21 @@ module.exports = React.createClass({
 			lockedEverything: true
 		};
 	},
+	getRandomState: function () {
+		var colors = [];
+		for (var i = 0; i < 4; i++) {
+			colors.push(infiniteGradients.randomColor());
+		}
+		return {
+			colors: colors,
+			radialMode: Math.random() < 0.5,
+			speed: infiniteGradients.floatBetween(0, 1),
+			offset: infiniteGradients.floatBetween(0, 100),
+			angle: infiniteGradients.floatBetween(0, 360),
+			posX: infiniteGradients.floatBetween(0, 1),
+			posY: infiniteGradients.floatBetween(0, 1)
+		};
+	},
 	tick: function () {
 		var i, offset,
 			colors = [null, null, null, null],
@@ -203,6 +218,8 @@ module.exports = React.createClass({
 			this.toggleState('lockedColor3');
 		} else if (char === 'M') {
 			this.toggleState('lockedColor4');
+		} else if (char === 'R') {
+			this.setState(this.getRandomState());
 		}
 	},
 	toggleState: function (key) {
