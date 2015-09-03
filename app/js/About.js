@@ -7,9 +7,9 @@ var readmeHtml = require('../../lib/readme').getReadme();
 module.exports = React.createClass({
 	render: function () {
 		return (
-			<div>
+			<div id="page-about">
 				<Header />
-				<div id="page-about" className="well" dangerouslySetInnerHTML={{__html: readmeHtml}}>
+				<div className="well" dangerouslySetInnerHTML={{__html: readmeHtml}}>
 				</div>
 			</div>
 		);

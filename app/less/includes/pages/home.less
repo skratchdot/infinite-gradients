@@ -21,5 +21,23 @@
 		small {
 			text-decoration: underline;
 		}
+		@media screen and (max-width: 420px) {
+			font-size: 10px;
+		}
 	}
+	.zeroclip-click-zone {
+		cursor: pointer;
+		margin: 0 auto;
+		width: 300px;
+		overflow: hidden;
+	}
+	@media screen and (max-width: 800px) {
+		.zeroclip-click-zone {
+			width: 100px;
+		}
+		.to-clipboard {
+			display: none;
+		}
+	}
+	
 }

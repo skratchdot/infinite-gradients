@@ -9,6 +9,7 @@ var throttle = require('lodash.throttle');
 var pathGet = require('object-path-get');
 var pathSet = require('object-path-set');
 var infiniteGradients = require('../../lib/index');
+require('window.requestanimationframe');
 // functions
 var getAngle = infiniteGradients.getAngle;
 var getDistance = infiniteGradients.getDistance;
@@ -18,7 +19,6 @@ module.exports = React.createClass({
 	mixins: [Router.Navigation, Router.State],
 	getDefaultProps: function () {
 		return {
-			intervalTime: 20,
 			speedCoefficient: 10
 		};
 	},
@@ -146,6 +146,7 @@ module.exports = React.createClass({
 			newState.colors = colors;
 			this.setState(newState);
 		}
+		window.requestAnimationFrame(this.tick);
 	},
 	setEventState: function (e) {
 		var height, width, originY, originX, distance, distanceNormalized, newState = {};
@@ -256,15 +257,14 @@ module.exports = React.createClass({
 		].join('\n');
 	},
 	componentDidMount: function () {
-		this.interval = setInterval(this.tick, this.props.intervalTime);
 		window.addEventListener('mousemove', this.handleMouseMove);
-		window.addEventListener('click', this.handleClick);
+		window.addEventListener('mouseup', this.handleClick);
 		window.addEventListener('keydown', this.handleKeydown);
+		window.requestAnimationFrame(this.tick);
 	},
 	componentWillUnmount: function () {
-		clearInterval(this.interval);
 		window.removeEventListener('mousemove', this.handleMouseMove);
-		window.removeEventListener('click', this.handleClick);
+		window.removeEventListener('mouseup', this.handleClick);
 		window.removeEventListener('keydown', this.handleKeydown);
 	},
 	updateUrl: function () {
@@ -341,7 +341,7 @@ module.exports = React.createClass({
 
 		document.body.style.backgroundImage = this.getCssBase();
 		return (
-			<div>
+			<div id="page-home">
 				<Header controls={controls} />
 				<div
 					style={{
@@ -357,13 +357,16 @@ module.exports = React.createClass({
 						</strong>
 						<br /><br />
 						<ReactZeroClipboard getText={this.handleCopyToClipboard}>
-							<div style={{cursor:'pointer',width:'300px',margin:'0 auto'}}>
+							<div className="zeroclip-click-zone">
 								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 700.4">
 								  <path d="M439.4 41.7v-29c0-7-5.7-12.7-12.6-12.7H188.3L0 188.3V615c0 7 5.6 12.6 12.6 12.6h414.2c7 0 12.5-5.6 12.5-12.5V42zM72.2 555.4v-342h128.6c7 0 12.6-5.6 12.6-12.6V72.2H367v483.2H72.3z"/>
 								  <path d="M501 167.8h-25.2v485.5c0 6-5 11-11 11h-359v25c0 6.2 5 11 11 11H501c6 0 11-4.8 11-11V179c0-6-5-11-11-11z"/>
 								</svg>
 								&nbsp;&nbsp;&nbsp;
-								<small>copy CSS to clipboard by clicking here</small>
+								<small>
+									copy CSS
+									<span className="to-clipboard">&nbsp;to clipboard by clicking here</span>
+								</small>
 							</div>
 						</ReactZeroClipboard>
 					</div>

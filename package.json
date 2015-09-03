@@ -44,7 +44,8 @@
     "reactify": "^1.1.1",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",
-    "vinyl-transform": "^1.0.0"
+    "vinyl-transform": "^1.0.0",
+    "window.requestanimationframe": "^1.0.0"
   },
   "dependencies": {
     "commander": "^2.8.1",

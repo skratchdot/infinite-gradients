@@ -22,10 +22,42 @@ header {
 
 #header-title {
 	float: left;
+	@media screen and (max-width: 1200px) {
+		text-align: center;
+		float: none;
+	}
+	@media screen and (max-width: 800px) {
+		h1 {
+			font-size: 1.5em;
+		}
+		span {
+			display: block;
+			height: 1px;
+			margin: -8px
+		}
+	}	
 }
 
 #header-controls {
 	float: right;
+	@media screen and (max-width: 1200px) {
+		float: none;
+		clear: both;
+		margin: 0 auto;
+		width: 732px;
+		#page-about &, #page-not-found & {
+			width: 60px;
+		}
+	}
+	@media screen and (max-width: 800px) {
+		float: none;
+		clear: both;
+		margin: 0 auto;
+		width: 306px;
+		#page-about &, #page-not-found & {
+			width: 50px;
+		}
+	}
 	.control {
 		position: relative;
 		cursor: pointer;
@@ -43,7 +75,8 @@ header {
 		}
 		small {
 			display: block;
-			font-size: x-small;
+			font-size: 10px;
+			margin-top: 2px;
 		}
 		&:hover {
 			background: rgba(255, 255, 255, 0.8);
@@ -55,5 +88,26 @@ header {
 			width: 15px;
 			height: 15px;
 		}
+		@media screen and (max-width: 800px) {
+			width: 40px;
+			font-size: .75em;
+			small {
+				font-size: 9px;
+				margin-top: 6px;
+			}
+			&:nth-child(6), &:nth-child(12) {
+				border-left: 0;
+			}
+			&:nth-child(1), &:nth-child(2), &:nth-child(3),
+			&:nth-child(4), &:nth-child(5), &:nth-child(6) {
+				border-bottom: 1px solid #999;
+			}
+		}
+	}
+}
+
+@media screen and (max-width: 1200px) {
+	#page-about #header-controls .control, #page-not-found #header-controls .control {
+		border: 0;
 	}
 }

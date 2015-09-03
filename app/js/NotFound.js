@@ -7,9 +7,9 @@ var Router = require('react-router');
 module.exports = React.createClass({
 	render: function () {
 		return (
-			<div>
+			<div id="page-not-found">
 				<Header />
-				<div id="page-not-found" className="well">
+				<div className="well">
 					<h1>404 - Page Not Found</h1>
 					<p>
 						<h4>Sorry, we couldn't find the page you were looking for.</h4>
