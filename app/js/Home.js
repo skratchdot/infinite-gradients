@@ -46,7 +46,7 @@ module.exports = React.createClass({
 		colors = pathGet(query, 'colors', '41f850,406f85,63ea4c,ce583f');
 		radialMode = pathGet(query, 'type', 'linear');
 		speed = getFloat(pathGet(query, 'speed', 0.2));
-		offset = getFloat(pathGet(query, 'offset', 16.0));
+		offset = getFloat(pathGet(query, 'offset', 16.0)) % 100;
 		angle = getFloat(pathGet(query, 'angle', 15));
 		posX = getFloat(pathGet(query, 'posX', 0));
 		posY = getFloat(pathGet(query, 'posY', 0));
@@ -109,10 +109,10 @@ module.exports = React.createClass({
 		if (!this.state.lockedEverything) {
 			if (!this.state.lockedOffset) {
 				offset = this.state.offset + (this.props.speedCoefficient * this.state.speed);
-				if (offset < -100) {
+				if (offset <= -100) {
 					offset = 0;
 					direction = -1;
-				} else if (offset > 100) {
+				} else if (offset >= 100) {
 					offset = 0;
 					direction = 1;
 				}
