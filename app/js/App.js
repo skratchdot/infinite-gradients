@@ -1,32 +1,26 @@
-/** @jsx React.DOM */
-"use strict";
-var React = require('react/addons');
-var Router = require('react-router');
-var Route = Router.Route;
-var About = require('./About');
-var Home = require('./Home');
-var NotFound = require('./NotFound');
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Router, Route } from 'react-router';
+import About from './About';
+import Home from './Home';
+import NotFound from './NotFound';
+import createBrowserHistory from 'history/lib/createBrowserHistory';
 
-var App = React.createClass({
-	render: function () {
-		return (<Router.RouteHandler />);
+import Header from './Header';
+
+const App = React.createClass({
+	render() {
+		return (<div>{this.props.children}</div>);
 	}
 });
 
 // create and render routes
 var routes = (
-	<Route handler={App}>
-		<Route handler={App} path="/infinite-gradients">
-			<Route name="Home" path="/infinite-gradients/?" handler={Home} scrollBehavior="scrollToTop" />
-			<Route name="About" path="/infinite-gradients/about/?" handler={About} scrollBehavior="scrollToTop" />
-		</Route>
-		<Route name="NotFound" path="*" handler={NotFound} scrollBehavior="scrollToTop" />
+	<Route component={App}>
+		<Route name="Home" component={Home} path="/infinite-gradients" />
+		<Route name="About" component={About} path="/infinite-gradients/about" />
+		<Route name="NotFound" path="*" component={NotFound} />
 	</Route>
 );
 
-Router.run(routes, Router.HistoryLocation, function (Handler) {
-	React.render(<Handler />, document.getElementById('app'));
-});
-
-// we are using browserify. setup the browser.
-exports.React = window.React = React;
+ReactDOM.render(<Router history={createBrowserHistory()}>{routes}</Router>, document.getElementById('app'));

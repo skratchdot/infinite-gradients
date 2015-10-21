@@ -1,14 +1,12 @@
-/** @jsx React.DOM */
-"use strict";
-var React = require('react/addons');
-var Router = require('react-router');
-var ReactZeroClipboard = require('react-zeroclipboard');
-var Header = require('./Header');
-var Control = require('./Control');
-var throttle = require('lodash.throttle');
-var pathGet = require('object-path-get');
-var pathSet = require('object-path-set');
-var infiniteGradients = require('../../lib/index');
+import React from 'react';
+import { Router, History } from 'react-router';
+import ReactZeroClipboard from 'react-zeroclipboard';
+import Header from './Header';
+import Control from './Control';
+import throttle from 'lodash.throttle';
+import pathGet from 'object-path-get';
+import pathSet from 'object-path-set';
+import infiniteGradients from '../../lib/index';
 require('window.requestanimationframe');
 // functions
 var getAngle = infiniteGradients.getAngle;
@@ -16,7 +14,7 @@ var getDistance = infiniteGradients.getDistance;
 var randomColor = infiniteGradients.randomColor;
 
 module.exports = React.createClass({
-	mixins: [Router.Navigation, Router.State],
+	mixins: [History],
 	getDefaultProps: function () {
 		return {
 			speedCoefficient: 10
@@ -42,7 +40,7 @@ module.exports = React.createClass({
 		};
 
 		// get items from query string
-		query = this.getQuery();
+		query = this.props.location.search;
 		colors = pathGet(query, 'colors', '41f850,406f85,63ea4c,ce583f');
 		radialMode = pathGet(query, 'type', 'linear');
 		speed = getFloat(pathGet(query, 'speed', 0.2));
@@ -268,9 +266,8 @@ module.exports = React.createClass({
 		window.removeEventListener('keydown', this.handleKeydown);
 	},
 	updateUrl: function () {
-		var route = 'Home';
-		if (this.isActive(route)) {
-			this.replaceWith(route, {}, {
+		if (this.props.history.isActive('/infinite-gradients')) {
+			this.history.replaceState(null, '/infinite-gradients', {
 				type: this.state.radialMode ? 'radial' : 'linear',
 				speed: this.state.speed.toFixed(3),
 				offset: this.state.offset.toFixed(2),

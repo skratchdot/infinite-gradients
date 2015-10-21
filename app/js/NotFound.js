@@ -1,8 +1,6 @@
-/** @jsx React.DOM */
-"use strict";
-var React = require('react/addons');
-var Header = require('./Header');
-var Router = require('react-router');
+import React from 'react';
+import Header from './Header';
+import { Router, Link } from 'react-router';
 
 module.exports = React.createClass({
 	render: function () {
@@ -16,7 +14,7 @@ module.exports = React.createClass({
 						<h5>
 							Try going to the
 							&nbsp;
-							<Router.Link to="Home">Homepage</Router.Link>
+							<Link to="/infinite-gradients">Homepage</Link>
 							&nbsp;
 							instead.
 						</h5>

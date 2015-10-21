@@ -1,7 +1,5 @@
-/** @jsx React.DOM */
-"use strict";
-var React = require('react');
-var LockIcon = require('./LockIcon');
+import React from 'react';
+import LockIcon from './LockIcon';
 
 module.exports = React.createClass({
 	getDefaultProps: function () {

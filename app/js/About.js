@@ -1,7 +1,5 @@
-/** @jsx React.DOM */
-"use strict";
-var React = require('react/addons');
-var Header = require('./Header');
+import React from 'react';
+import Header from './Header';
 var readmeHtml = require('../../lib/readme').getReadme();
 
 module.exports = React.createClass({

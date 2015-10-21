@@ -1,11 +1,9 @@
-/** @jsx React.DOM */
-"use strict";
-var React = require('react');
-var Router = require('react-router');
-var Control = require('./Control');
+import React from 'react';
+import { Router, Link, History } from 'react-router';
+import Control from './Control';
 
 module.exports = React.createClass({
-	mixins: [Router.Navigation],
+	mixins: [History],
 	getDefaultProps: function () {
 		return {
 			controls: []
@@ -14,7 +12,7 @@ module.exports = React.createClass({
 	render: function () {
 		var $this = this,
 			onClick = function () {
-				$this.transitionTo('/infinite-gradients/about');
+				$this.history.pushState(null, '/infinite-gradients/about');
 			}, controls = [
 				<Control
 					key="control-about"
@@ -28,7 +26,7 @@ module.exports = React.createClass({
 			<header>
 				<div id="header-title">
 					<h1>
-						<Router.Link to="Home">Infinite Gradients</Router.Link>
+						<Link to="/infinite-gradients">Infinite Gradients</Link>
 						&nbsp;
 						<small><a href="http://skratchdot.com/">by skratchdot</a></small>
 					</h1>

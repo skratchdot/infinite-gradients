@@ -1,4 +1,3 @@
-/** @jsx React.DOM */
 /*
  * SVG Image Locations
  * 
@@ -8,8 +7,7 @@
  * compression done here: https://jakearchibald.github.io/svgomg/
  * 
  */
-"use strict";
-var React = require('react');
+import React from 'react';
 
 module.exports = React.createClass({
 	getDefaultProps: function () {
