@@ -307,20 +307,20 @@ infiniteGradients.getLinearGradient(['red','#286554','blue','#9619e2'], 25, 142.
 
 ### Clone the Project
 
-```
+```bash
 git clone https://github.com/skratchdot/infinite-gradients.git
 cd infinite-gradients
 ```
 
 ### Install the Dependencies
 
-```
+```bash
 npm install
 ```
 
 ### Run the Application (and watch for changes)
 
-```
+```bash
 gulp
 ```
 
