@@ -333,6 +333,7 @@ Now browse to the app at [http://localhost:8080/infinite-gradients](http://local
 - [Randomized Gradient Generator](http://paintbycode.github.io/gradient-generator/)
 - [Colorzilla Gradient Editor](http://www.colorzilla.com/gradient-editor/)
 - [AngryTools.com Gradient Editor](http://angrytools.com/gradient/)
+- [CSS Gradient Generator](https://www.css-gradient.com/)
 
 **...more to come. please submit a PR if you know what's missing**
 
