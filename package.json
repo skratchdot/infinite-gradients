@@ -41,7 +41,7 @@
     "marked": "^0.3.5",
     "object-path-get": "0.0.2",
     "object-path-set": "0.0.1",
-    "react": "^0.14.0",
+    "react": "^15.3.1",
     "react-dom": "^0.14.0",
     "react-router": "^1.0.0-rc3",
     "react-zeroclipboard": "^2.0.1",
