@@ -44,7 +44,7 @@
     "react": "^0.14.0",
     "react-dom": "^0.14.0",
     "react-router": "^1.0.0-rc3",
-    "react-zeroclipboard": "^2.0.1",
+    "react-zeroclipboard": "^3.2.2",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",
     "vinyl-transform": "^1.0.0",
