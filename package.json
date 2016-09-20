@@ -42,7 +42,7 @@
     "object-path-get": "0.0.2",
     "object-path-set": "0.0.1",
     "react": "^0.14.0",
-    "react-dom": "^0.14.0",
+    "react-dom": "^15.3.2",
     "react-router": "^1.0.0-rc3",
     "react-zeroclipboard": "^2.0.1",
     "vinyl-buffer": "^1.0.0",
