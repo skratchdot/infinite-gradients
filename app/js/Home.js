@@ -347,6 +347,15 @@ module.exports = React.createClass({
 						display: this.state.radialMode ? 'none' : 'block'
 					}}
 					id="arrow">&rarr;</div>
+				<div style={{
+					visibility:(this.state.angle > 200 && this.state.angle < 201 && this.state.speed > 0.9)?'visible':'hidden',
+					position: 'absolute',
+					top: '50px',
+					left: '20px',
+					width: 100,
+					height: 30
+				}}
+				>For Gena &hearts;</div>
 				<div id="css-container">
 					<div className="well">
 						<strong>
